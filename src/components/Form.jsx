@@ -6,13 +6,13 @@ export default function Form({ onSubmit, currentUser }) {
   return (
     <form onSubmit={onSubmit}>
       <fieldset id="fieldset">
-        <p>Sign the guest book, { currentUser.accountId }!</p>
+        <p>Send your meme, { currentUser.accountId }!</p>
         <p className="highlight">
-          <label htmlFor="message">Message:</label>
+          <label htmlFor="message">Meme:</label>
           <input
-            autoComplete="off"
             autoFocus
             id="message"
+            type="file"
             required
           />
         </p>

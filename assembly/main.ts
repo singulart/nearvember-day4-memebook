@@ -1,4 +1,5 @@
-import { PostedMessage, messages } from './model';
+import { PostedMessage, messages, suckers } from './model';
+import { context } from "near-sdk-core";
 
 // --- contract code goes below
 
@@ -14,7 +15,15 @@ export function addMessage(text: string): void {
   // Creating a new message and populating fields with our data
   const message = new PostedMessage(text);
   // Adding the message to end of the the persistent collection
+
+  const sender = context.sender;
+  assert(
+    !suckers.has(sender),
+    "Only one meme per account, my dear!"
+  );
+
   messages.push(message);
+  suckers.add(sender);
 }
 
 /**
