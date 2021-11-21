@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import premium from '../../assets/premium.png';
 
 
 export default function Messages({ messages, contractError }) {
@@ -19,6 +20,7 @@ export default function Messages({ messages, contractError }) {
         <p key = {i}>
           <strong>{message.sender}</strong> 
           <> uploaded meme at {new Date(message.addedAt / 1000000).toLocaleTimeString()}<br/></>
+          {message.premium ? <img src={premium} width="25px" height="25px"/> : <></>}
           <img src={message.text}/>
         </p>
       )}
