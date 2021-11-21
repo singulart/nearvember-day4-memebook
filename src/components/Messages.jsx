@@ -8,7 +8,7 @@ export default function Messages({ messages, contractError }) {
   return (
     <>
       <Snackbar
-        open={contractError.length > 0}
+        open={contractError?.length > 0}
         autoHideDuration={6000}
       > 
         <Alert severity="error">{contractError}</Alert>
@@ -17,7 +17,7 @@ export default function Messages({ messages, contractError }) {
       {messages.map((message, i) =>
         // TODO: format as cards, add timestamp
         <p key = {i}>
-          <strong>{message.sender} posted on {message.addedAt}</strong>
+          <strong>{message.sender} posted on {new Date(message.addedAt / 1000000).toISOString()}</strong>
           <img src={message.text}/>
         </p>
       )}
