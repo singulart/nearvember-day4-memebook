@@ -7,7 +7,7 @@ import SignIn from './components/SignIn';
 import Messages from './components/Messages';
 
 const SUGGESTED_DONATION = '0';
-const BOATLOAD_OF_GAS = Big(9).times(10 ** 14).toFixed();
+const BOATLOAD_OF_GAS = Big(3).times(10 ** 14).toFixed();
 
 const App = ({ contract, currentUser, nearConfig, wallet }) => {
   const [messages, setMessages] = useState([]);
@@ -63,7 +63,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
   const signIn = () => {
     wallet.requestSignIn(
       nearConfig.contractName,
-      'NEAR Guest Book'
+      'My Little NEAR'
     );
   };
 
@@ -75,17 +75,17 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
   return (
     <main>
       <header>
-        <h1>NEAR Guest Book</h1>
-        { currentUser
-          ? <button onClick={signOut}>Log out</button>
-          : <button onClick={signIn}>Log in</button>
-        }
+        <h1>NEAR Meme Bank</h1>
       </header>
       { currentUser
         ? <Form onSubmit={onSubmit} currentUser={currentUser} showCallInProgress={showCallInProgress}/>
         : <SignIn/>
       }
       { !!currentUser && !!messages.length && <Messages messages={messages} contractError={contractError} /> }
+      { currentUser
+          ? <button onClick={signOut}>Log out</button>
+          : <button onClick={signIn}>Log in</button>
+        }
     </main>
   );
 };

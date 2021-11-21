@@ -24,7 +24,7 @@ html {
   }
 
   @media (prefers-color-scheme: dark) {
-    --bg: #25282A;
+    --bg: #338d49;
     --fg: #fff;
     --secondary: var(--blue);
 
@@ -61,7 +61,7 @@ fieldset {
 }
 
 label {
-  color: var(--gray);
+  color: var(--primary);
 }
 
 button, .highlight {

@@ -17,7 +17,8 @@ export default function Messages({ messages, contractError }) {
       {messages.map((message, i) =>
         // TODO: format as cards, add timestamp
         <p key = {i}>
-          <strong>{message.sender} posted on {new Date(message.addedAt / 1000000).toISOString()}</strong>
+          <strong>{message.sender}</strong> 
+          <> uploaded meme at {new Date(message.addedAt / 1000000).toLocaleTimeString()}<br/></>
           <img src={message.text}/>
         </p>
       )}

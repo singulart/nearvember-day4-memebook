@@ -17,7 +17,7 @@ export default function Form({ onSubmit, currentUser, showCallInProgress }) {
           />
         </p>
         <p>
-          <label htmlFor="donation">Donation (optional):</label>
+          <label htmlFor="donation">Pay $$$ to Win!</label>
           <input
             autoComplete="off"
             defaultValue={'0'}
@@ -30,7 +30,7 @@ export default function Form({ onSubmit, currentUser, showCallInProgress }) {
           <span title="NEAR Tokens">Ⓝ</span>
         </p>
         <button type="submit" disabled={showCallInProgress}>
-          Sign
+          To the moon!
         </button>
         {showCallInProgress && <img src={spinner} width='20px' height='20px'/>}
       </fieldset>
