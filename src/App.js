@@ -7,11 +7,13 @@ import SignIn from './components/SignIn';
 import Messages from './components/Messages';
 
 const SUGGESTED_DONATION = '0';
-const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
+const BOATLOAD_OF_GAS = Big(9).times(10 ** 14).toFixed();
 
 const App = ({ contract, currentUser, nearConfig, wallet }) => {
   const [messages, setMessages] = useState([]);
   const [contractError, setContractError] = useState([]);
+  const [showCallInProgress, setShowCallInProgress] = useState(false);
+
 
   useEffect(() => {
     // TODO: don't just fetch once; subscribe!
@@ -30,6 +32,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
     // add uuid to each message, so we know which one is already known
     var reader  = new FileReader();
     reader.onloadend = function () {
+      setShowCallInProgress(true);
       contract.addMessage(
         { text: reader.result },
         BOATLOAD_OF_GAS,
@@ -41,10 +44,16 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
           donation.value = SUGGESTED_DONATION;
           fieldset.disabled = false;
           message.focus();
+          setShowCallInProgress(false);
         });
       }).catch((error) => {
-        console.log(error.kind.ExecutionError);
-        setContractError(error.kind.ExecutionError);
+        console.log(error);
+        setShowCallInProgress(false);
+        if(error.kind.ExecutionError) {
+          setContractError(error.kind.ExecutionError);
+        } else if (error.kind.ActionsValidation) {
+          setContractError('Your meme doesn\'t fit into blockchain! Try smaller one');
+        }
       })
     }
     reader.readAsDataURL(message.files[0]);
@@ -73,10 +82,10 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
         }
       </header>
       { currentUser
-        ? <Form onSubmit={onSubmit} currentUser={currentUser} />
+        ? <Form onSubmit={onSubmit} currentUser={currentUser} showCallInProgress={showCallInProgress}/>
         : <SignIn/>
       }
-      { !!currentUser && !!messages.length && <Messages messages={messages} contractError={contractError}/> }
+      { !!currentUser && !!messages.length && <Messages messages={messages} contractError={contractError} /> }
     </main>
   );
 };

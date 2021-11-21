@@ -16,14 +16,14 @@ export function addMessage(text: string): void {
   const message = new PostedMessage(text);
   // Adding the message to end of the the persistent collection
 
-  const sender = context.sender;
+  const sucker = context.sender;
   assert(
-    !suckers.has(sender),
+    !suckers.has(sucker),
     "Only one meme per account, my dear!"
   );
 
   messages.push(message);
-  suckers.add(sender);
+  suckers.add(sucker);
 }
 
 /**
