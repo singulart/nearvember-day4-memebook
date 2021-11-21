@@ -4,7 +4,7 @@ import { context } from "near-sdk-core";
 // --- contract code goes below
 
 // The maximum number of latest messages the contract returns.
-const MESSAGE_LIMIT = 10;
+const MESSAGE_LIMIT = 666;
 
 /**
  * Adds a new message under the name of the sender's account id.\
