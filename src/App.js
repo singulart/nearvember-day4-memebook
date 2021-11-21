@@ -11,6 +11,7 @@ const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
 const App = ({ contract, currentUser, nearConfig, wallet }) => {
   const [messages, setMessages] = useState([]);
+  const [contractError, setContractError] = useState([]);
 
   useEffect(() => {
     // TODO: don't just fetch once; subscribe!
@@ -27,19 +28,27 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
     // TODO: optimistically update page with new message,
     // update blockchain data in background
     // add uuid to each message, so we know which one is already known
-    contract.addMessage(
-      { text: message.value },
-      BOATLOAD_OF_GAS,
-      Big(donation.value || '0').times(10 ** 24).toFixed()
-    ).then(() => {
-      contract.getMessages().then(messages => {
-        setMessages(messages);
-        message.value = '';
-        donation.value = SUGGESTED_DONATION;
-        fieldset.disabled = false;
-        message.focus();
-      });
-    });
+    var reader  = new FileReader();
+    reader.onloadend = function () {
+      contract.addMessage(
+        { text: reader.result },
+        BOATLOAD_OF_GAS,
+        Big(donation.value || '0').times(10 ** 24).toFixed()
+      ).then(() => {
+        contract.getMessages().then(messages => {
+          setMessages(messages);
+          message.value = '';
+          donation.value = SUGGESTED_DONATION;
+          fieldset.disabled = false;
+          message.focus();
+        });
+      }).catch((error) => {
+        console.log(error.kind.ExecutionError);
+        setContractError(error.kind.ExecutionError);
+      })
+    }
+    reader.readAsDataURL(message.files[0]);
+
   };
 
   const signIn = () => {
@@ -67,7 +76,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
         ? <Form onSubmit={onSubmit} currentUser={currentUser} />
         : <SignIn/>
       }
-      { !!currentUser && !!messages.length && <Messages messages={messages}/> }
+      { !!currentUser && !!messages.length && <Messages messages={messages} contractError={contractError}/> }
     </main>
   );
 };

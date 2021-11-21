@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
-export default function Messages({ messages }) {
+
+export default function Messages({ messages, contractError }) {
   return (
     <>
-      <h2>Messages</h2>
+      <Snackbar
+        open={contractError.length > 0}
+        autoHideDuration={6000}
+      > 
+        <Alert severity="error">{contractError}</Alert>
+      </Snackbar>
+      <h2>Memes</h2>
       {messages.map((message, i) =>
         // TODO: format as cards, add timestamp
-        <p key={i} className={message.premium ? 'is-premium' : ''}>
-          <strong>{message.sender}</strong>:<br/>
-          {message.text}
+        <p key = {i}>
+          <strong>{message.sender} posted on {message.addedAt}</strong>
+          <img src={message.text}/>
         </p>
       )}
     </>
