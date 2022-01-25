@@ -18,7 +18,7 @@
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.13.13",
-    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.22.1",
     "babel-jest": "^27.4.6",
     "eslint": "^7.26.0",
@@ -36,7 +36,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.1",
     "@material-ui/lab": "^4.0.0-alpha.60",
-    "@types/react": "^16.8.6 || ^17.0.0",
+    "@types/react": "^17.0.38",
     "big.js": "^6.1.1",
     "env-cmd": "^10.1.0",
     "near-api-js": "^0.41.0",
