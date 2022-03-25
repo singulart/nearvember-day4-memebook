@@ -15,7 +15,7 @@
     "test": "yarn build:contract:debug && asp && jest"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.13.13",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -36,7 +36,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.1",
     "@material-ui/lab": "^4.0.0-alpha.60",
-    "@types/react": "^17.0.39",
+    "@types/react": "^17.0.43",
     "big.js": "^6.1.1",
     "env-cmd": "^10.1.0",
     "near-api-js": "^0.41.0",
