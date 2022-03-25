@@ -36,7 +36,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.1",
     "@material-ui/lab": "^4.0.0-alpha.60",
-    "@types/react": "^17.0.39",
+    "@types/react": "^17.0.43",
     "big.js": "^6.1.1",
     "env-cmd": "^10.1.0",
     "near-api-js": "^0.41.0",
